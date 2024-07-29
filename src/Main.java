@@ -9,7 +9,7 @@ public class Main {
 
 		cc.depositar(100);
 		cc.transferir(100, poupanca);
-		cc.sacar(120);
+		cc.sacar(20);
 		
 		cc.imprimirExtrato();
 		poupanca.imprimirExtrato();

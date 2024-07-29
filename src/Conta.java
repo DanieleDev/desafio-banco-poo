@@ -15,24 +15,27 @@ public abstract class Conta implements Iconta {
 		this.cliente = cliente;
 	}
 
-
-
     @Override
     public void depositar(double valor) {
         saldo += valor;
         
     }
-
+ 
     @Override
     public void sacar(double valor) {
-			 saldo -= valor;
+		double novoSaldo;
+		if(valor > saldo){
+			System.out.println("Saldo insuficiente. ");
+		}else{
+			 novoSaldo = saldo - valor;
+			System.out.println("Saldo atual: " + novoSaldo);
+		}
 	}
 
     @Override
     public void transferir(double valor, Iconta contaDestino) {
-        this.sacar(valor);
+        this.sacar(valor); 
 		contaDestino.depositar(valor);
-        
     }
      
     public int getAgencia() {
@@ -46,21 +49,20 @@ public abstract class Conta implements Iconta {
 	public double getSaldo() {
 		return saldo;
 	}
+	
+    public void setSaldo(double saldo) {
+		this.saldo = saldo - saque;
+	}
 
-    public double getSaque() {
+	public double getSaque() {
         return saque;
     }
 	
-
-	public void setSaque(double saque) {
-		this.saque = saque;
-	}
-
 	protected void imprimirInfosComuns() {
 		System.out.println(String.format("Titular: %s", this.cliente.getNome()));
 		System.out.println(String.format("Agencia: %d", this.agencia));
 		System.out.println(String.format("Numero: %d", this.numero));
-		System.out.println(String.format("Saldo: %.2f", this.saldo));
+		System.out.println(String.format("Saldo: %.2f", getSaldo()));
 	}
 
 }
